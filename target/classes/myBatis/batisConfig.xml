@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>	
+    <typeAliases>
+        <typeAlias alias = "Owner" type = "PropertyManager.manager.Owner"/>
+        <typeAlias alias = "Property" type = "PropertyManager.manager.Property"/>
+        <typeAlias alias = "TitleDeed" type = "PropertyManager.manager.TitleDeed"/>
+    </typeAliases>	
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />
+    </typeHandlers>
+    <environments default = "dev">
+      <environment id = "dev">
+         <transactionManager type = "JDBC"/>  		
+            <dataSource type = "UNPOOLED">
+               <property name = "driver" value = "org.apache.derby.jdbc.ClientDriver"/>
+               <property name = "url" value = "jdbc:derby://localhost:1527/MyDbTest"/>
+               <property name = "username" value = "app"/>
+               <property name = "password" value = "APP"/>
+            </dataSource>        			
+      </environment>
+      <environment id = "test">
+         <transactionManager type = "JDBC"/>  		
+            <dataSource type = "UNPOOLED">
+               <property name = "driver" value = "com.mysql.jdbc.Driver"/>
+               <property name = "url" value = "jdbc:derby:memory:ownermanagerimpltest;create=true"/>
+            </dataSource>        			
+      </environment>
+    </environments>	
+    <mappers>
+      <mapper resource = "myBatis/ownerMapper.xml"/>
+      <mapper resource = "myBatis/propertyMapper.xml"/>
+    </mappers>   
+</configuration>

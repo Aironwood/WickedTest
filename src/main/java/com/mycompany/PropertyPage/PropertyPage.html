@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+    </head>
+    <body>
+    <wicket:extend>
+        <div class="message">
+            <h2>Tabuľka majetkov</h2>
+        </div>
+        <table cellspacing="0" class="dataview" width="100%">
+            <tbody>
+                <tr align="left">
+                    <th>Id</th>
+                    <th>Ulica</th>
+                    <th>Mesto</th>
+                    <th>Cena</th>
+                    <th>Typ</th>
+                    <th>Rozloha</th>
+                    <th>Dátum výstavby</th>
+                    <th>Popis</th>
+                </tr>
+                <tr wicket:id="simple">
+                    <td><span wicket:id="id">ID</span></td>
+                    <td><span wicket:id="street">street</span></td>
+                    <td><span wicket:id="town">town</span></td>
+                    <td><span wicket:id="price">price</span></td>
+                    <td><span wicket:id="typeof">typeof</span></td>
+                    <td><span wicket:id="square">square</span></td>
+                    <td><span wicket:id="dateofbuild">dateofbuild</span></td>
+                    <td><span wicket:id="description">description</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <footer>
+            <input wicket:id="addbutton" type="submit" value="Pridať"/>
+            <input wicket:id="removeButton" type="submit" value="Odstrániť"/>
+        </footer>
+
+    </wicket:extend>
+</body>
+</html>
+

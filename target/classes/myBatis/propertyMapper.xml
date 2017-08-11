@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="propertyMapper">
+    <resultMap id="propertyResult" type="Property">
+        <id property="id" column="ID"/>
+        <result property="addressStreet" column="STREET"/>
+        <result property="addressTown" column="TOWN"/>
+        <result property="price" column="PRICE"/>
+        <result property="typeOfBuilding" column="TYPEOF"/>
+        <result property="squareMeters" column="SQUARE"/>
+        <result property="dateOfBuild" column="DATEOFBUILD"/>
+        <result property="description" column="DESCRIPTION"/>
+    </resultMap>
+    
+    <insert id = "insert" parameterType = "Property">
+        <selectKey keyProperty="id" resultType="long" order="AFTER"  keyColumn="ID">
+            SELECT MAX(id) FROM property
+        </selectKey>
+        INSERT INTO property (STREET, TOWN, PRICE, TYPEOF, SQUARE, DATEOFBUILD, DESCRIPTION)
+        VALUES (#{addressStreet}, #{addressTown}, #{price}, #{typeOfBuilding}, #{squareMeters}, #{dateOfBuild}, #{description}) 
+    </insert> 
+    
+    <update id="update" parameterType="Property">
+        UPDATE property SET STREET = #{addressStreet}, TOWN = #{addressTown}, PRICE = #{price}, 
+        TYPEOF = #{typeOfBuilding}, SQUARE = #{squareMeters}, DATEOFBUILD = #{dateOfBuild}, DESCRIPTION = #{description}
+        WHERE ID = #{id}
+    </update>
+    
+    <delete id="deleteById" parameterType="long">
+        DELETE from property WHERE ID = #{id}
+    </delete>
+    
+    <select id="getAll" resultMap="propertyResult">
+        SELECT * FROM property
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="Property">
+        SELECT * FROM property WHERE ID = #{id}
+    </select>
+    
+    <select id="getByTown" parameterType="String" resultMap="propertyResult">
+        SELECT * FROM property WHERE TOWN LIKE )('%' || #{addressTown} || '%')
+    </select>
+</mapper>
+
+

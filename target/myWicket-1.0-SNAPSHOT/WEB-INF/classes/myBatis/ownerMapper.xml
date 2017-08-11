@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="ownerMapper">
+<resultMap id = "ownerResult" type = "Owner">
+   <id property="id" column="ID"/>
+   <result property = "name" column = "NAME"/>
+   <result property = "surname" column = "SURNAME"/>
+   <result property = "born" column = "BORN"/>
+   <result property = "phoneNumber" column = "PHONENUMBER"/>
+   <result property = "addressStreet" column = "ADDRESSSTREET"/>
+   <result property = "addressTown" column = "ADDRESSTOWN"/>
+</resultMap>
+
+<insert id = "insert" parameterType = "Owner">
+  <selectKey keyProperty="id" resultType="long" order="AFTER"  keyColumn="ID">
+    SELECT MAX(id) FROM owner
+  </selectKey>
+   INSERT INTO owner (NAME, SURNAME, BORN, PHONENUMBER, ADDRESSSTREET, ADDRESSTOWN)
+  VALUES (#{name}, #{surname}, #{born}, #{phoneNumber}, #{addressStreet}, #{addressTown}) 
+</insert>
+
+<update id = "update" parameterType = "Owner">
+   UPDATE owner SET NAME = #{name}, SURNAME = #{surname}, BORN = #{born}, PHONENUMBER = #{phoneNumber}, 
+    ADDRESSSTREET = #{addressStreet}, ADDRESSTOWN = #{addressTown} WHERE ID = #{id}
+</update>
+
+<delete id = "deleteById" parameterType = "long">
+   DELETE from owner WHERE ID = #{id}
+</delete>
+
+<select id = "getAll" resultMap = "ownerResult">
+   SELECT * FROM owner 
+</select>
+
+<select id = "getById" parameterType = "long" resultType = "Owner">
+   SELECT * FROM owner WHERE ID = #{id} 
+</select>
+
+<select id = "getBySurname" parameterType = "String" resultMap = "ownerResult">
+   SELECT * FROM owner WHERE SURNAME LIKE )('%' || #{surname} || '%')
+</select>
+
+</mapper>

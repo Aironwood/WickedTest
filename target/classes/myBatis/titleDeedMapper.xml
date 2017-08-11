@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="titleDeedMapper">
+    <resultMap id="titleDeedResult" type="TitleDeed">
+        <id property="id" column="ID"/>
+        <result property="ownerId" column="OWNERID"/>
+        <result property="propertyId" column="PROPERTYID"/>
+        <result property="startDate" column="STARTDATE"/>
+        <result property="endDate" column="ENDDATE"/> 
+    </resultMap>
+    
+    <insert id="insert" parameterType="TitleDeed">
+        <selectKey keyProperty="id" resultType="long" order="AFTER"  keyColumn="ID">
+            SELECT MAX(id) FROM titleDeed
+        </selectKey>
+        INSERT INTO titledeed (OWNERID, PROPERTYID, STARTDATE, ENDATE) VALUES 
+        (#{ownerId}, #{propertyId}, #{startDate}, #{endDate})
+    </insert>
+    
+    <update id="update" parameterType="TitleDeed">
+        UPDATE titledeed SET OWNERID = #{ownerId}, PROPERTYID = #{propertyId}, STARTDATE = #{startDate}, ENDDATE = #{endDate}
+        WHERE ID = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="long">
+        DELETE from titledeed WHERE ID = #{id}
+    </delete>
+    
+    <select id="getAll" resultMap="TitleDeed">
+        SELECT * FROM titledeed
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="TitleDeed">
+        SELECT * FROM titleDeed WHERE ID = #{id}
+    </select>
+    
+    <select id="getByOwner" parameterType="long" resultMap="titleDeedResult">
+        SELECT * FROM titledeed WHERE OWNERID = #{ownerId}
+    </select>
+    
+    <select id="getByProperty" parameterType="long" resultMap="titleDeedResult">
+        SELECT * FROM titledeed WHERE PROPERTYID = #{propertyId}
+    </select>
+    
+    <select id="findPropertiesByOwners" resultMap="propertyResult">
+        SELECT * FROM property JOIN titleDeed A ON ID = A.OWNERID 
+    </select>
+    
+    <select id="findOwnersByProperties" resultMap="ownerResult">
+        SELECT * FROM owner JOIN titleDeed A ON ID = A.PROPERTYID
+    </select>
+
+</mapper>
+ 

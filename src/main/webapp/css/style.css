@@ -1,0 +1,50 @@
+body {
+  font-family: Sans-Serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+#body {
+        width: 60%;
+        min-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+h1 {
+        font-size: 120%;
+        border-bottom: 2px solid black;
+}
+
+h2 {
+        font-size: 110%
+}
+
+.message {
+        border-bottom: 1px solid black;
+}
+
+#menu ul {
+        margin: 0px;
+        padding: 0px;
+}
+
+#menu ul li {
+        list-style: none;
+        display: inline-block;
+}
+
+#menu ul li a {
+        text-decoration: none;;
+        color: black;
+        border: 1px solid black;
+        padding: 5px;
+}
+
+#menu ul li a:hover {
+        background-color: #ccc;
+}
+
+#footer {
+        border-top: 2px solid black;
+}
