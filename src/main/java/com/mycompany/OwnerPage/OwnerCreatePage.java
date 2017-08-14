@@ -27,6 +27,8 @@ import org.apache.wicket.extensions.yui.calendar.DateField;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
@@ -39,43 +41,9 @@ public class OwnerCreatePage extends BasePage {
 
     public OwnerCreatePage()
     {
-        Form form = new Form("form"){};
-        //Date dateProp = new Date();
-        form.add(new TextField<String>("nameProperty", new PropertyModel<String>(owner, "name")).setRequired(true));
-        form.add(new TextField<String>("surnameProperty", new PropertyModel<String>(owner, "surname")).setRequired(true));
-        //form.add(new DateField("bornDateProperty", new PropertyModel<>(owner, "born")).setRequired(true));
-        form.add(new TextField<String>("phoneNumberProperty", new PropertyModel<String>(owner, "phoneNumber")).setRequired(true));
-        form.add(new TextField<String>("addressStreetProperty", new PropertyModel<String>(owner, "addressStreet")).setRequired(true));
-        form.add(new TextField<String>("addressTownProperty", new PropertyModel<String>(owner, "addressTown")).setRequired(true));
-        Button addButton = new Button("okButton"){
-            @Override
-            public void onSubmit()
-            {
-                info("OK butted executed");
-                owner.setBorn(LocalDate.now());
-                OwnerManager ownerManager = AppCommons.getOwnerManager();
-                ownerManager.createOwner(owner);
-                setResponsePage(PropertyPage.class);
-            }
-        };
-        form.add(addButton);
-        Button cancelButton = new Button("cancelButton"){
-            @Override
-            public void onSubmit()
-            {
-                info("Cancel button executed");
-                setResponsePage(OwnerPage.class);
-            }
-            @Override
-            public void onError()
-            {
-                info("Cancel button executed");
-                setResponsePage(OwnerPage.class);
-            }
-        };
+        add(new FeedbackPanel("feedback"));
+        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(owner)));
 
-        form.add(cancelButton);
-        add(form);
     }
     
     @Override

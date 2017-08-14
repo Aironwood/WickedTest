@@ -7,27 +7,11 @@
     </head>
     <body>
     <wicket:extend>
-        <form wicket:id="form">
-            <div class="message">
-                <h2>Formulár vytvorenia vlastníka</h2>
-            </div>
-            <p><label for="nameProperty">Meno: </label>
-                <input wicket:id="nameProperty" type="text" size="40"/></p>
-            <p><label for="surnameProperty">Priezvisko: </label>
-                <input wicket:id="surnameProperty" type="text" size="20"/></p>
-            <!-- <p><label for="bornDateProperty">Dátum narodenia: </label><span wicket:id="bornDateProperty"/></p>-->
-            <p><label for="phoneNumberProperty">Telefón: </label>
-                <input wicket:id="phoneNumberProperty" type="text" size="40"</input></p>
-            <p><label for="addressStreetProperty">Ulica: </label>
-                <input wicket:id="addressStreetProperty" type="text" size="40"</input></p>
-            <p><label for="addressTownProperty">Mesto: </label>
-                <input wicket:id="addressTownProperty" type="text" size="40"</input></p>
-            <footer>
-                <input wicket:id="okButton" type="submit" value="Ok"/>
-                <input wicket:id="cancelButton" type="submit" value="Cancel"/>
-            </footer>
-        </form>
-
+        <span wicket:id="ownerCreatePanel">
+        </span>
+        <footer>
+            <div wicket:id="feedback"></div>
+        </footer>
     </wicket:extend>
 </body>
 </html>

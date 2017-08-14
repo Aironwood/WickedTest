@@ -74,7 +74,7 @@ public class OwnerPage extends BasePage {
             }
         };
         form.add(removeButton);
-        dataView.setItemsPerPage(20);
+        dataView.setItemsPerPage(50);
         form.add(dataView);
         add(form);
     }
