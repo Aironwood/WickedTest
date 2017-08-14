@@ -29,6 +29,7 @@ public class OwnerCreatePanel extends GenericPanel<Owner> {
         final TextField<String> tSurname = new TextField<String>("surname");
         tSurname.add(new NameValidator(1, 10, "Priezvisko"));
         final TextField<String> tPhone = new TextField<String>("phoneNumber");
+        tPhone.add(new PhoneValidator());
         final TextField<String> tStreet = new TextField<String>("addressStreet");
         tStreet.add(new NameValidator(1, 10, "Ulica"));
         final TextField<String> tTown = new TextField<String>("addressTown");

@@ -15,28 +15,28 @@
  */
 package com.mycompany.OwnerPage;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.io.Serializable;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.IValidator;
+import java.util.regex.*;
 import org.apache.wicket.validation.ValidationError;
 
 /**
  *
  * @author jan.jarabinec
  */
-@Data
-public class PhoneNumber {
-    private String prefix;
-    private String bodyNumber;
-    
-    public PhoneNumber(String rawFormat)
-    {
-        if(rawFormat.matches("(^\\+[0-9]{3})([0-9]{9}$)"))
+public class PhoneValidator implements IValidator<String>, Serializable {
+
+    @Override
+    public void validate(IValidatable<String> iv) {
+        String rawPhone = iv.getValue();
+        
+        if(!rawPhone.matches("(^\\+[0-9]{3})([0-9]{9}$)"))
         {
-            prefix = rawFormat.substring(0, 3);
-            bodyNumber = rawFormat.substring(4);
-        }else
-        {
-            throw new IllegalArgumentException("Zadany zly format pri vytvarani objektu reprezentujuceho telefonne cislo");
+            ValidationError error = new ValidationError();
+            error.setMessage("Zlý formát telefónneho čísla. Príklad správneho čísla: +421263678954");
+            iv.error(error);
         }
     }
+    
 }
