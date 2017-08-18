@@ -10,18 +10,19 @@
     <wicket:extend>
         <form wicket:id="form">
             <div class="message">
-                <h2>Tabuľka vlastníkov</h2>
+                <h2><wicket:message key=pageHeader /></h2>
             </div>
             <table cellspacing="2" class="dataview" width="100%">
                 <tbody>
                     <tr align="left">
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Born Date</th>
-                        <th>Phonenumber</th>
-                        <th>Street</th>
-                        <th>Town</th>
+                        <th><wicket:message key=tName /></th>
+                        <th><wicket:message key=tSurname /></th>
+                        <th><wicket:message key=tBorn /></th>
+                        <th><wicket:message key=tPhone /></th>
+                        <th><wicket:message key=tStreet /></th>
+                        <th><wicket:message key=tTown /></th>
+                        <th><wicket:message key=selection /></th>
                     </tr>
                     <tr wicket:id="rows">
                         <td><span wicket:id="id">Test ID</span></td>
@@ -31,12 +32,15 @@
                         <td><span wicket:id="Phonenumber">Test Phonenumber</span></td>
                         <td><span wicket:id="Street">Test Street</span></td>
                         <td><span wicket:id="Town">Test Town</span></td>
+                        <td><input type="checkbox" wicket:id="check" /></td>
                     </tr>
                 </tbody>
             </table>
             <footer>
-                <input wicket:id="addbutton" type="submit" value="Pridať"/>
-                <input wicket:id="removeButton" type="submit" value="Odstrániť"/>
+                <input wicket:id="addbutton" type="submit" wicket:message="value:addbutton" />
+                <input wicket:id="updateButton" type="submit" wicket:message="value:updateButton" />
+                <input wicket:id="removeButton" type="submit" wicket:message="value:removeButton"/>
+                <div wicket:id="feedback"></div>
             </footer>
         </form>
     </wicket:extend>

@@ -36,14 +36,18 @@ import org.apache.wicket.model.PropertyModel;
  *
  * @author jan.jarabinec
  */
-public class OwnerCreatePage extends BasePage {
-    private final Owner owner = new Owner();
+public class OwnerCreatePage extends BasePage { 
 
     public OwnerCreatePage()
     {
         add(new FeedbackPanel("feedback"));
-        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(owner)));
-
+        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(new Owner())));
+    }
+    
+    public OwnerCreatePage(Owner own)             
+    {
+        add(new FeedbackPanel("feedback"));
+        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(own)));
     }
     
     @Override

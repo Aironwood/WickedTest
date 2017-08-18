@@ -17,7 +17,7 @@ public class Owner implements Serializable {
     private String name;
     private String surname;
     private LocalDate born;
-    private String phoneNumber;
+    private PhoneNumber phoneNumber;
     private String addressStreet;
     private String addressTown;
 
