@@ -15,7 +15,7 @@ public class OwnDateConverter implements IConverter<LocalDate> {
 
     @Override
     public LocalDate convertToObject(String string, Locale locale) throws ConversionException {
-        LocalDate localDate = LocalDate.parse(string, DateTimeFormatter.ofPattern("d.M.yy"));
+        LocalDate localDate = LocalDate.parse(string, DateTimeFormatter.ISO_LOCAL_DATE);
         return localDate;
     }
 

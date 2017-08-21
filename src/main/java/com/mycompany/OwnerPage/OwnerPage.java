@@ -5,7 +5,7 @@ import com.mycompany.BasePage;
 import PropertyManager.manager.Owner;
 import PropertyManager.common.AppCommons;
 import PropertyManager.manager.*;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.extensions.model.AbstractCheckBoxModel;
 import org.apache.wicket.markup.html.form.Button;
@@ -17,18 +17,15 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 
-
 public class OwnerPage extends BasePage {
-    private List ownersList;
-    private final MyDataView dataView;
-    private OwnerManager ownerManager;
-    private HashSet<Owner> selectedOwners = new HashSet<>();
+
+    private List<Owner> selectedOwners = new ArrayList<>();
 
     public OwnerPage() {
-        ownerManager = AppCommons.getOwnerManager();
-        ownersList = ownerManager.findAllOwners();
-        dataView = new MyDataView("rows", new ListDataProvider(ownersList));
-        
+        OwnerManager ownerManager = AppCommons.getOwnerManager();
+        List<Owner> ownersList = ownerManager.findAllOwners();
+        OwnerDataView dataView = new OwnerDataView("rows", new ListDataProvider(ownersList));
+
         Button addButton = new Button("addbutton") {
             @Override
             public void onSubmit() {
@@ -43,7 +40,11 @@ public class OwnerPage extends BasePage {
             @Override
             public void onSubmit() {
                 for (Owner own : selectedOwners) {
-                    ownerManager.deleteOwner(own);
+                    try {
+                        ownerManager.deleteOwner(own);
+                    } catch (Exception ex) {
+                        error(getString("ownerConstrainError"));
+                    }
                 }
                 setResponsePage(OwnerPage.class); //bad bad
             }
@@ -56,7 +57,7 @@ public class OwnerPage extends BasePage {
                     error(getString("updateOnlyOne"));
                     return;
                 }
-                setResponsePage(new OwnerCreatePage(selectedOwners.iterator().next()));
+                setResponsePage(new OwnerCreatePage(selectedOwners.get(0)));
 
             }
         };
@@ -69,7 +70,7 @@ public class OwnerPage extends BasePage {
 
     @Override
     public String getTitle() {
-        return "Kataster - vlastníci";
+        return this.getString("tabTitleOwn");
     }
 
     private class CheckBoxSelection extends AbstractCheckBoxModel {
@@ -96,13 +97,13 @@ public class OwnerPage extends BasePage {
         }
     }
 
-    private class MyDataView extends DataView {
+    private class OwnerDataView extends DataView {
 
-        public MyDataView(String id, IDataProvider dataProvider) {
+        public OwnerDataView(String id, IDataProvider dataProvider) {
             super(id, dataProvider);
         }
 
-        public MyDataView(String id, IDataProvider dataProvider, long itemsPerPage) {
+        public OwnerDataView(String id, IDataProvider dataProvider, long itemsPerPage) {
             super(id, dataProvider, itemsPerPage);
         }
 

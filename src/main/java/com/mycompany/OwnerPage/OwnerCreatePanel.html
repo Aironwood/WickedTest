@@ -3,25 +3,26 @@
     <body>
     <wicket:panel>
         <form wicket:id="form">
-                    <div class="message">
-                        <h2>Formulár vytvorenia vlastníka</h2>
-                    </div>
-                    <p><label for="name">Meno: </label>
-                        <input wicket:id="name" type="text" size="40"/></p>
-                    <p><label for="surname">Priezvisko: </label>
-                        <input wicket:id="surname" type="text" size="20"/></p>
-                    <!-- <p><label for="bornDateProperty">Dátum narodenia: </label><span wicket:id="bornDateProperty"/></p>-->
-                    <p><label for="phoneNumber">Telefón: </label>
-                        <input wicket:id="phoneNumber" type="text" size="40"</input></p>
-                    <p><label for="addressStreet">Ulica: </label>
-                        <input wicket:id="addressStreet" type="text" size="40"</input></p>
-                    <p><label for="addressTown">Mesto: </label>
-                        <input wicket:id="addressTown" type="text" size="40"</input></p>
-                    <footer>
-                        <input wicket:id="okButton" type="submit" value="Ok"/>
-                        <input wicket:id="cancelButton" type="submit" value="Cancel"/>
-                    </footer>
-                </form>   
-        </wicket:panel>
-    </body>
+            <div class="message">
+                <h2><wicket:message key="createOwnerFormularHead"/></h2>
+            </div>
+            <p><span><wicket:message key="tName"/>: </span>
+                <input wicket:id="name" type="text" size="40"/></p>
+            <p><span><wicket:message key="tSurname"/>: </span>
+                <input wicket:id="surname" type="text" size="20"/></p>
+            <p><span><wicket:message key="tBorn"/>: </span>
+                <input wicket:id="born"/></p>
+            <p><span><wicket:message key="tPhone"/></span>
+                <input wicket:id="phoneNumber" type="text" size="40"</input></p>
+            <p><span><wicket:message key="tStreet"/></span>
+                <input wicket:id="addressStreet" type="text" size="40"</input></p>
+            <p><span><wicket:message key="tTown"/></span>
+                <input wicket:id="addressTown" type="text" size="40"</input></p>
+            <footer>
+                <input wicket:id="okButton" type="submit" wicket:message="value:addbutton"/>
+                <input wicket:id="cancelButton" type="submit" value="Cancel"/>
+            </footer>
+        </form>   
+    </wicket:panel>
+</body>
 </html>

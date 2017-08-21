@@ -41,13 +41,13 @@ public class OwnerCreatePage extends BasePage {
     public OwnerCreatePage()
     {
         add(new FeedbackPanel("feedback"));
-        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(new Owner())));
+        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<>(new Owner())));
     }
     
     public OwnerCreatePage(Owner own)             
     {
         add(new FeedbackPanel("feedback"));
-        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<Owner>(own)));
+        add(new OwnerCreatePanel("ownerCreatePanel", new CompoundPropertyModel<>(own)));
     }
     
     @Override
